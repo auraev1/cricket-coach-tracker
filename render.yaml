@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: cricket-coach-tracker
+    env: python
+    plan: starter
+    buildCommand: ""
+    startCommand: python3 server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11

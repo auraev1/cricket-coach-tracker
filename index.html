@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket Coach Tracker Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div id="authShell" class="auth-shell">
+        <section class="auth-panel">
+          <div class="panel-header">
+            <p class="eyebrow">Coach Access</p>
+            <h1>Run your cricket academy from one place.</h1>
+            <p class="hero-copy">
+              Create a coach account, set up your academy and teams, then track
+              player development with secure reporting.
+            </p>
+          </div>
+
+          <p id="statusBanner" class="status-banner" hidden></p>
+
+          <div class="auth-tabs">
+            <button type="button" class="ghost-btn tab-active" data-auth-tab="login">Login</button>
+            <button type="button" class="ghost-btn" data-auth-tab="register">Register</button>
+          </div>
+
+          <form id="loginForm" data-auth-form="login" class="form-grid">
+            <label>
+              Email
+              <input type="email" id="loginEmail" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="loginPassword" required />
+            </label>
+            <button type="submit" class="primary-btn">Login</button>
+          </form>
+
+          <form id="registerForm" data-auth-form="register" class="form-grid" hidden>
+            <label>
+              Coach Name
+              <input type="text" id="registerCoachName" required />
+            </label>
+            <label>
+              Academy Name
+              <input type="text" id="registerAcademyName" required />
+            </label>
+            <label>
+              Email
+              <input type="email" id="registerEmail" required />
+            </label>
+            <label>
+              Password
+              <input type="password" id="registerPassword" required />
+            </label>
+            <label>
+              Role
+              <select id="registerRole">
+                <option value="Head Coach">Head Coach</option>
+                <option value="Assistant Coach">Assistant Coach</option>
+              </select>
+            </label>
+            <button type="submit" class="primary-btn">Create Account</button>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

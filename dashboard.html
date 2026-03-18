@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cricket Coach Tracker Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div id="appShell">
+        <header class="hero">
+          <div>
+            <p class="eyebrow">Cricket Coaching Dashboard</p>
+            <h1 id="academyName">Academy Dashboard</h1>
+            <p class="hero-copy">
+              Logged in as <strong id="coachName">Coach</strong> <span id="coachRole"></span>. Organize teams,
+              track player roles, and generate academy reports.
+            </p>
+            <div class="button-row hero-actions">
+              <button type="button" class="ghost-btn" id="logoutButton">Logout</button>
+            </div>
+          </div>
+          <div class="hero-card">
+            <p class="hero-stat-label">Teams</p>
+            <p class="hero-stat" id="teamCount">0</p>
+            <p class="hero-stat-label">Players</p>
+            <p class="hero-stat" id="playerCount">0</p>
+            <p class="hero-stat-label">Performance Entries</p>
+            <p class="hero-stat" id="entryCount">0</p>
+          </div>
+        </header>
+
+        <p id="statusBanner" class="status-banner" hidden></p>
+
+        <main class="layout">
+          <section class="panel" id="coachManagementPanel" hidden>
+            <div class="panel-header">
+              <h2>Coach Management</h2>
+              <p>Head coach controls for inviting and managing assistant coaches.</p>
+            </div>
+            <form id="coachForm" class="form-grid">
+              <label>
+                Coach Name
+                <input type="text" id="newCoachName" required />
+              </label>
+              <label>
+                Email
+                <input type="email" id="newCoachEmail" required />
+              </label>
+              <label>
+                Temporary Password
+                <input type="password" id="newCoachPassword" required />
+              </label>
+              <label>
+                Role
+                <select id="newCoachRole">
+                  <option value="Assistant Coach">Assistant Coach</option>
+                  <option value="Head Coach">Head Coach</option>
+                </select>
+              </label>
+              <button type="submit" class="primary-btn">Add Coach</button>
+            </form>
+            <div id="coachList" class="team-list">
+              <p class="empty-state">No coaches added yet.</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Team Management</h2>
+              <p id="teamPanelCopy">Create academy teams and age groups.</p>
+            </div>
+            <form id="teamForm" class="form-grid">
+              <label>
+                Team Name
+                <input type="text" id="teamName" required />
+              </label>
+              <label>
+                Age Group
+                <input type="text" id="teamAgeGroup" placeholder="e.g. U14, U19, Senior" />
+              </label>
+              <button type="submit" class="primary-btn">Add Team</button>
+            </form>
+            <div id="teamList" class="team-list">
+              <p class="empty-state">No teams created yet.</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Player Details</h2>
+              <p>Create a player profile with cricket-specific attributes.</p>
+            </div>
+            <form id="playerForm" class="form-grid">
+              <label>
+                Team
+                <select id="playerTeam">
+                  <option value="">No team yet</option>
+                </select>
+              </label>
+              <label>
+                Player Name
+                <input type="text" id="playerName" required />
+              </label>
+              <label>
+                Age
+                <input type="number" id="playerAge" min="5" max="60" />
+              </label>
+              <label>
+                Primary Role
+                <select id="primaryRole" required>
+                  <option value="">Select role</option>
+                  <option value="Batsman">Batsman</option>
+                  <option value="Bowler">Bowler</option>
+                  <option value="Wicketkeeper">Wicketkeeper</option>
+                  <option value="All-rounder">All-rounder</option>
+                </select>
+              </label>
+              <label>
+                Level
+                <select id="playerLevel" required>
+                  <option value="">Select level</option>
+                  <option value="Beginner">Beginner</option>
+                  <option value="Basic">Basic</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                  <option value="Pro">Pro</option>
+                </select>
+              </label>
+              <label>
+                Bowling Style
+                <select id="bowlingStyle">
+                  <option value="">Not applicable</option>
+                  <option value="Fast">Fast</option>
+                  <option value="Medium Pace">Medium Pace</option>
+                  <option value="Swing">Swing</option>
+                  <option value="Seam">Seam</option>
+                  <option value="Off Spin">Off Spin</option>
+                  <option value="Leg Spin">Leg Spin</option>
+                  <option value="Left-arm Orthodox">Left-arm Orthodox</option>
+                  <option value="Mystery Spin">Mystery Spin</option>
+                </select>
+              </label>
+              <label>
+                Bowling Arm
+                <select id="bowlingArm">
+                  <option value="">Not applicable</option>
+                  <option value="Right Arm">Right Arm</option>
+                  <option value="Left Arm">Left Arm</option>
+                </select>
+              </label>
+              <label>
+                Batting Hand
+                <select id="battingHand">
+                  <option value="">Not applicable</option>
+                  <option value="Right Hand">Right Hand</option>
+                  <option value="Left Hand">Left Hand</option>
+                </select>
+              </label>
+              <label>
+                Batting Position
+                <select id="battingPosition">
+                  <option value="">Not applicable</option>
+                  <option value="Opener">Opener</option>
+                  <option value="Top Order">Top Order</option>
+                  <option value="Middle Order">Middle Order</option>
+                  <option value="Finisher">Finisher</option>
+                </select>
+              </label>
+              <label>
+                Batting Style
+                <select id="battingStyle">
+                  <option value="">Not applicable</option>
+                  <option value="Attacking">Attacking</option>
+                  <option value="Defensive">Defensive</option>
+                  <option value="Anchoring">Anchoring</option>
+                  <option value="Balanced">Balanced</option>
+                </select>
+              </label>
+              <label>
+                Secondary Skill
+                <input type="text" id="secondarySkill" placeholder="e.g. Slip fielding" />
+              </label>
+              <label class="full-width">
+                Coach Notes
+                <textarea id="playerNotes" rows="3"></textarea>
+              </label>
+              <div class="button-row full-width">
+                <button type="submit" class="primary-btn">
+                  <span id="playerSubmitText">Save Player</span>
+                </button>
+                <button type="button" class="ghost-btn" id="cancelPlayerEdit" hidden>
+                  Cancel Edit
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Performance Entry</h2>
+              <p>Capture training or match performance for any player.</p>
+            </div>
+            <form id="performanceForm" class="form-grid">
+              <label>
+                Player
+                <select id="performancePlayer" required>
+                  <option value="">Select player</option>
+                </select>
+              </label>
+              <label>
+                Session Date
+                <input type="date" id="performanceDate" required />
+              </label>
+              <label>
+                Session Type
+                <select id="sessionType" required>
+                  <option value="">Select type</option>
+                  <option value="Match">Match</option>
+                  <option value="Practice">Practice</option>
+                  <option value="Fitness">Fitness</option>
+                  <option value="Assessment">Assessment</option>
+                </select>
+              </label>
+              <label>
+                Runs
+                <input type="number" id="runs" min="0" value="0" />
+              </label>
+              <label>
+                Balls Faced
+                <input type="number" id="ballsFaced" min="0" value="0" />
+              </label>
+              <label>
+                Wickets
+                <input type="number" id="wickets" min="0" value="0" />
+              </label>
+              <label>
+                Overs
+                <input type="number" id="overs" min="0" step="0.1" value="0" />
+              </label>
+              <label>
+                Runs Conceded
+                <input type="number" id="runsConceded" min="0" value="0" />
+              </label>
+              <label>
+                Catches / Stumpings
+                <input type="number" id="dismissals" min="0" value="0" />
+              </label>
+              <label>
+                Coach Rating (10)
+                <input type="number" id="coachRating" min="1" max="10" value="7" />
+              </label>
+              <label class="full-width">
+                Session Notes
+                <textarea id="performanceNotes" rows="3"></textarea>
+              </label>
+              <div class="button-row full-width">
+                <button type="submit" class="primary-btn">
+                  <span id="performanceSubmitText">Add Performance</span>
+                </button>
+                <button type="button" class="ghost-btn" id="cancelPerformanceEdit" hidden>
+                  Cancel Edit
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <section class="panel report-panel">
+            <div class="panel-header">
+              <h2>Report Generator</h2>
+              <p>Review academy progress over monthly or longer cycles.</p>
+            </div>
+            <div class="report-controls">
+              <label>
+                Team
+                <select id="reportTeam">
+                  <option value="all">All teams</option>
+                </select>
+              </label>
+              <label>
+                Player
+                <select id="reportPlayer">
+                  <option value="all">All players</option>
+                </select>
+              </label>
+              <label>
+                Period
+                <select id="reportRange">
+                  <option value="1">Monthly</option>
+                  <option value="3">3 Months</option>
+                  <option value="6">6 Months</option>
+                  <option value="12">Yearly</option>
+                </select>
+              </label>
+              <button id="generateReport" class="primary-btn" type="button">
+                Generate Report
+              </button>
+            </div>
+            <div class="button-row export-row">
+              <button id="exportCsv" class="ghost-btn" type="button">Export CSV</button>
+              <button id="printReport" class="ghost-btn" type="button">Print / Save PDF</button>
+            </div>
+            <div id="reportOutput" class="report-output">
+              <p class="empty-state">
+                Add teams, players, and performance entries, then generate a report.
+              </p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Player Directory</h2>
+              <p>Quick view of all academy players and their assigned teams.</p>
+            </div>
+            <div id="playerList" class="player-list">
+              <p class="empty-state">No players added yet.</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Performance Log</h2>
+              <p>Manage the entries recorded by coaches across matches and sessions.</p>
+            </div>
+            <div id="performanceList" class="player-list">
+              <p class="empty-state">No performance entries added yet.</p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
