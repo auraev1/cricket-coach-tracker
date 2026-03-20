@@ -232,6 +232,17 @@ textarea {
   color: var(--accent-strong);
 }
 
+.author-credit {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.dashboard-credit {
+  margin-top: 1.5rem;
+}
+
 .player-list,
 .team-list,
 .report-output {
